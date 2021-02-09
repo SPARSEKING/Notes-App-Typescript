@@ -61,15 +61,6 @@ export default defineComponent({
       ],
     } as NotesApp
   },
-  provide() {
-    return {
-      notes: this.notes,
-      message: this.message,
-      value: this.search,
-      addNote: this.addNote,
-      removeNote: this.removeNote,
-    }
-  },
    computed: {
     notesFilter () {
       let array: Note[] = this.notes,
@@ -110,7 +101,5 @@ export default defineComponent({
   mounted() {
     console.log(this.message);
   }
-
 });
 </script>
-
