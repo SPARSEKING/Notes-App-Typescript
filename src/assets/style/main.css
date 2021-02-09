@@ -1,0 +1,153 @@
+html {
+    font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    color: #101010;
+    height: 100%;
+}
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+body {
+    font-size: 18px;
+    font-weight: 400px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+}
+
+*, *:before, *:after {box-sizing: border-box;}
+
+h1, h2, h3, h4, h5, h6 {margin: 0}
+
+input, textarea, select, button { border: 1px solid #d8e0ed;}
+
+a { text-decoration: none;}
+
+ul, li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+section, .section {
+    position: relative;
+    padding: 40px 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+.wrapper-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    flex: 0 0 auto;
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+input {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+textarea {
+    margin-top: 40px;
+    border-radius: 10px;
+    width: 100%;
+    height: 100px;
+}
+
+.container-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.new-note {
+    display: flex;
+    flex-direction: column;
+}
+.button-new-note {
+    margin-top: 20px;
+    width: 150px;
+    height: 40px;
+    align-self: center;
+    border-radius: 10px;
+    font-size: 18px;
+    background: #402caf;
+    border-color: #402caf;
+    color: #FFF;
+}
+
+.notes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 40px 0;
+}
+
+.note {
+    width: 48%;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    background: #d8e0ed;
+    border-radius: 10px;
+}
+
+.descr {
+    margin: 20px 0;
+}
+
+.date {
+    font-size: 14px;
+    color: #999;
+}
+
+.note-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.note-header p {
+    color: #402caf;
+    font-size: 22px;
+}
+
+.note-head {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+svg {
+    margin-right: 12px;
+    color: #999;
+}
+
+.active {
+   color: #402caf;
+}
+
+svg:last-child {
+    margin-right: 0px;
+}
+
+.full {
+    width: 100%;
+}

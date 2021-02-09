@@ -1,27 +1,46 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class="wrapper">
+    <div class="wrapper-content">
+      <section>
+        <div class="container">
+        <message v-if="message" :message='message'/>
+        <new-note :note='note' @addNote='addNote'/>
+        <div class="note-head">
+          <h1 class="container-title">{{ title }}</h1>
+          <search :value="search" placeholder="Find your note" @search="search = $event" />
+          <div class="icons">
+            <svg :class="{ active: grid}" @click="grid = true" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <svg :class="{ active: !grid}" @click="grid = false" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
+          </div>
+        </div>
+        <notes :notes='notesFilter' :grid="grid" @remove='removeNote'/>
+        </div>
+      </section>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import message from '@/components/Message.vue';
+import newNote from '@/components/NewNote.vue';
+import notes from '@/components/Notes.vue';
+import search from '@/components/Search.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
-  }
+    message,
+    newNote,
+    notes,
+    search,
+  },
+  data() {
+    return {
+      title:
+    }
+  },
+
 });
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
