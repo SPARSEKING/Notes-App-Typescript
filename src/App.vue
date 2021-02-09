@@ -3,8 +3,8 @@
     <div class="wrapper-content">
       <section>
         <div class="container">
-        <message v-if="message" />
-        <new-note :note='note' @addNote='addNote'/>
+        <message v-if="message" :message="message"/>
+        <new-note @addNote='addNote'/>
         <div class="note-head">
           <h1 class="container-title">{{ title }}</h1>
           <search :value="search" placeholder="Find your note" @search="search = $event" />
@@ -61,7 +61,7 @@ export default defineComponent({
       ],
     } as NotesApp
   },
-   computed: {
+  methods: {
     notesFilter () {
       let array: Note[] = this.notes,
           search = this.search
@@ -76,11 +76,8 @@ export default defineComponent({
       })
       // Error
       return array
-    }
-  },
-  methods: {
-    addNote() {
-      const { title, description } = this.note;
+    },
+    addNote(title: string, description: string) {
       if (title === '') {
         this.message = 'Title can`t be blank!';
         return false;
@@ -91,15 +88,10 @@ export default defineComponent({
         date: new Date(Date.now()).toLocaleString(),
       });
       this.message = null;
-      this.note.title = '';
-      this.note.description = '';
     },
     removeNote(index: number): void {
       this.notes.splice(index, 1);
     }
   },
-  mounted() {
-    console.log(this.message);
-  }
 });
 </script>
