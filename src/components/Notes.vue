@@ -17,19 +17,24 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-
-interface Note {
-    title: string;
-    description: string;
-    date: any;
-}
+import  { Note }  from './Notes';
 
 export default defineComponent({
   name: 'Notes',
   props: {
     notes: {
-        type: Array as unknown as PropType<Note>,
+        type: Array as PropType<Note[]>,
+        required: true,
+    },
+    grid: {
+        type: Boolean,
+        required: true,
     }
   },
+  methods: {
+        removeNote(index: number): void {
+            this.$emit('remove', index);
+        }
+    }
 });
 </script>

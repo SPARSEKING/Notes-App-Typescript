@@ -3,7 +3,7 @@
     <div class="wrapper-content">
       <section>
         <div class="container">
-        <message v-if="message" :message='message'/>
+        <message v-if="message" />
         <new-note :note='note' @addNote='addNote'/>
         <div class="note-head">
           <h1 class="container-title">{{ title }}</h1>
@@ -26,6 +26,8 @@ import message from '@/components/Message.vue';
 import newNote from '@/components/NewNote.vue';
 import notes from '@/components/Notes.vue';
 import search from '@/components/Search.vue';
+import { Note } from './Note';
+import { NotesApp} from './NotesApp';
 
 export default defineComponent({
   name: 'App',
@@ -37,9 +39,77 @@ export default defineComponent({
   },
   data() {
     return {
-      title:
+      title: 'Notes App',
+      message: null,
+      grid: true,
+      search: '',
+      note: {
+        title: '',
+        description: '',
+      },
+      notes: [
+        {
+          title: 'Vue',
+          description: 'Vue is very nice framework!',
+          date: new Date(Date.now()).toLocaleString(),
+        },
+        {
+          title: 'Angular',
+          description: 'Angular is a not bad framework',
+          date: new Date(Date.now()).toLocaleString(),
+        },
+      ],
+    } as NotesApp
+  },
+  provide() {
+    return {
+      notes: this.notes,
+      message: this.message,
+      value: this.search,
+      addNote: this.addNote,
+      removeNote: this.removeNote,
     }
   },
+   computed: {
+    notesFilter () {
+      let array: Note[] = this.notes,
+          search = this.search
+      if (!search) return array
+      // Small
+      search = search.trim().toLowerCase()
+      // Filter
+      array = array.filter(function (item) {
+        if (item.title.toLowerCase().indexOf(search) !== -1) {
+          return item
+        }
+      })
+      // Error
+      return array
+    }
+  },
+  methods: {
+    addNote() {
+      const { title, description } = this.note;
+      if (title === '') {
+        this.message = 'Title can`t be blank!';
+        return false;
+      }
+      this.notes.push({
+        title,
+        description,
+        date: new Date(Date.now()).toLocaleString(),
+      });
+      this.message = null;
+      this.note.title = '';
+      this.note.description = '';
+    },
+    removeNote(index: number): void {
+      this.notes.splice(index, 1);
+    }
+  },
+  mounted() {
+    console.log(this.message);
+  }
 
 });
 </script>

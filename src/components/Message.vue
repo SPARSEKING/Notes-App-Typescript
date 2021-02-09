@@ -9,12 +9,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Message',
-  props: {
-    message: {
-      type: String,
-      required: true,
-    },
-  },
+  inject: ["message"],
 });
 </script>
 
