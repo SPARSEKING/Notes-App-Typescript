@@ -4,7 +4,7 @@
       <section>
         <div class="container">
         <message v-if="message" :message="message"/>
-        <new-note @addNote='addNote'/>
+        <new-note :note="note" @addNote='addNote'/>
         <div class="note-head">
           <h1 class="container-title">{{ title }}</h1>
           <search :value="search" placeholder="Find your note" @search="search = $event" />
@@ -27,7 +27,8 @@ import newNote from '@/components/NewNote.vue';
 import notes from '@/components/Notes.vue';
 import search from '@/components/Search.vue';
 import { Note } from './Note';
-import { NotesApp} from './NotesApp';
+import { NotesApp } from './NotesApp';
+import { Message } from './Message';
 
 export default defineComponent({
   name: 'App',
@@ -40,7 +41,9 @@ export default defineComponent({
   data() {
     return {
       title: 'Notes App',
-      message: null,
+      message: {
+        err: null,
+      },
       grid: true,
       search: '',
       note: {
@@ -61,7 +64,12 @@ export default defineComponent({
       ],
     } as NotesApp
   },
-  methods: {
+  provide() {
+    return {
+      message: this.message
+    }
+  },
+  computed: {
     notesFilter () {
       let array: Note[] = this.notes,
           search = this.search
@@ -77,9 +85,11 @@ export default defineComponent({
       // Error
       return array
     },
+  },
+  methods: {
     addNote(title: string, description: string) {
       if (title === '') {
-        this.message = 'Title can`t be blank!';
+        this.message.err = 'Title can`t be blank!';
         return false;
       }
       this.notes.push({
@@ -87,7 +97,7 @@ export default defineComponent({
         description,
         date: new Date(Date.now()).toLocaleString(),
       });
-      this.message = null;
+      this.message.err = null;
     },
     removeNote(index: number): void {
       this.notes.splice(index, 1);

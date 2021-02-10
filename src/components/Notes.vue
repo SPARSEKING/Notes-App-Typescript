@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import  { Note }  from './Notes';
+import  { Note }  from '../Note';
 
 export default defineComponent({
   name: 'Notes',
