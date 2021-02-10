@@ -3,17 +3,17 @@
     <div class="wrapper-content">
       <section>
         <div class="container">
-        <message v-if="message" :message="message"/>
-        <new-note :note="note" @addNote='addNote'/>
+        <message v-if="message.err"/>
+        <new-note />
         <div class="note-head">
           <h1 class="container-title">{{ title }}</h1>
           <search :value="search" placeholder="Find your note" @search="search = $event" />
           <div class="icons">
-            <svg :class="{ active: grid}" @click="grid = true" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            <svg :class="{ active: !grid}" @click="grid = false" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
+            <svg :class="{ active: grid.value}" @click="grid.value = true" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <svg :class="{ active: !grid.value}" @click="grid.value = false" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
           </div>
         </div>
-        <notes :notes='notesFilter' :grid="grid" @remove='removeNote'/>
+        <notes />
         </div>
       </section>
     </div>
@@ -29,6 +29,7 @@ import search from '@/components/Search.vue';
 import { Note } from './Note';
 import { NotesApp } from './NotesApp';
 import { Message } from './Message';
+import { Grid } from './Grid';
 
 export default defineComponent({
   name: 'App',
@@ -44,7 +45,9 @@ export default defineComponent({
       message: {
         err: null,
       },
-      grid: true,
+      grid: {
+        value: true,
+      },
       search: '',
       note: {
         title: '',
@@ -66,7 +69,13 @@ export default defineComponent({
   },
   provide() {
     return {
-      message: this.message
+      message: this.message,
+      note: this.note,
+      addNote: this.addNote,
+      notes: this.notes,
+      notesFilter: this.notesFilter,
+      grid: this.grid,
+      remove: this.removeNote
     }
   },
   computed: {

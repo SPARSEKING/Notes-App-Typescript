@@ -1,6 +1,6 @@
 <template>
     <div class="message">
-        <p>{{ message }}</p>
+        <p>{{ message.err }}</p>
     </div>
 </template>
 
@@ -9,6 +9,7 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Message',
+  inject: ['message']
 });
 </script>
 

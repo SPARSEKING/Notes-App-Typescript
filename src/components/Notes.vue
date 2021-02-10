@@ -1,7 +1,7 @@
 <template>
 
 <div class="notes">
-    <div class="note" :class="{ full: !grid}" v-for='(note, index) in notes' :key='index'>
+    <div class="note" :class="{ full: !grid.value}" v-for='(note, index) in notes' :key='index'>
         <div class="note-header">
             <p >{{ note.title }}</p>
             <p style="cursor: pointer;" @click="removeNote(index)">x</p>
@@ -21,20 +21,11 @@ import  { Note }  from '../Note';
 
 export default defineComponent({
   name: 'Notes',
-  props: {
-    notes: {
-        type: Array as PropType<Note[]>,
-        required: true,
-    },
-    grid: {
-        type: Boolean,
-        required: true,
-    }
-  },
+  inject: ['notes', 'grid','removeNote'],
   methods: {
-        removeNote(index: number): void {
-            this.$emit('remove', index);
-        }
+        // removeNote(index: number): void {
+        //     this.$emit('remove', index);
+        // }
     }
 });
 </script>

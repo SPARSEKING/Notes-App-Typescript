@@ -17,12 +17,13 @@ export default defineComponent({
       description: '',
     }
   },
+  inject: ['addNote'],
   methods: {
-      addNote(): void {
-          this.$emit('addNote', this.title, this.description);
-          this.title = '';
-          this.description = '';
-      }
+      // addNote(): void {
+      //     this.$emit('addNote', this.title, this.description);
+      //     this.title = '';
+      //     this.description = '';
+      // }
   }
 });
 </script>
