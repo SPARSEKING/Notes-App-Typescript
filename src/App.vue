@@ -107,6 +107,8 @@ export default defineComponent({
         date: new Date(Date.now()).toLocaleString(),
       });
       this.message.err = null;
+      this.note.title = '';
+      this.note.description = '';
     },
     removeNote(index: number): void {
       this.notes.splice(index, 1);
